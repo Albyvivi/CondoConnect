@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './feedback.page.html',
   styleUrls: ['./feedback.page.scss'],
 })
-export class FeedbackFormComponent {
+export class FeedbackPage {
   feedback: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
@@ -15,6 +15,15 @@ export class FeedbackFormComponent {
       subject: ['', Validators.required],
       desc: ['', Validators.required],
     });
+  }
+
+  selectFeedbackType(feedbackType: string) {
+    let feedbackTypeControl = this.feedback.get('feedbackType');
+    if (feedbackTypeControl) {
+      feedbackTypeControl.setValue(feedbackType);
+    } else {
+      console.log('Control no encontrado');
+    }
   }
 
   submitFeedback() {

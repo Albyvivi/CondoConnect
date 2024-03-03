@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'feedback',
     loadChildren: () => import('./feedback/feedback.module').then( m => m.FeedbackPageModule)
   },
+  {
+    path: 'visitor',
+    loadChildren: () => import('./visitor/visitor.module').then( m => m.VisitorPageModule)
+  },
 ];
 
 @NgModule({

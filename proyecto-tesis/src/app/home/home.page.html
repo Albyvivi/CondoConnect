@@ -6,7 +6,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="12" size-md="4">
-          <ion-card>
+          <ion-card (click)="goToBookings()">
             <ion-card-header
               style="display: flex; justify-content: space-between"
             >
@@ -17,7 +17,7 @@
               Realiza tu reserva de chanchas o casa comunal
             </ion-card-content>
           </ion-card>
-          <ion-card>
+          <ion-card (click)="goToVisitors()">
             <ion-card-header
               style="display: flex; justify-content: space-between"
             >
@@ -28,7 +28,7 @@
               Informa a seguridad si esperas visitas o entregas a domicilio
             </ion-card-content>
           </ion-card>
-          <ion-card>
+          <ion-card (click)="goToFeedback()">
             <ion-card-header
               style="display: flex; justify-content: space-between"
             >
