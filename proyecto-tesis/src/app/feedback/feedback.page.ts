@@ -13,7 +13,7 @@ export class FeedbackFormComponent {
     this.feedback = this.formBuilder.group({
       feedbackType: ['', Validators.required],
       subject: ['', Validators.required],
-      comentario: ['', Validators.required],
+      desc: ['', Validators.required],
     });
   }
 
