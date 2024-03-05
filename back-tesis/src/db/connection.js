@@ -1,13 +1,16 @@
 const { Sequelize } = require('sequelize');
 
-const database = "test";s
-const username = "postgres";
-const password = "";
-const host = "localhost";
+const database = "condoconnect";
+const username = "sadmin";
+const password = "A28w3*Dc";
+const host = "db-softbuilders-dev.postgres.database.azure.com";
 
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: 'postgres',
+  dialect: 'postgres',dialectOptions: {
+    ssl:true
+  },
+  quoteIdentifiers: false
 });
 
 module.exports = {

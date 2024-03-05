@@ -1,30 +1,33 @@
-const { Datatype } = require("sequelize");
-const sequelize = require("../../config/database");
+const {DataTypes} = require("sequelize");
+const {sequelize} = require("../db/connection");
 const BookingModel = sequelize.define("booking", {
   id: {
-    type: Datatype.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   area: {
-    type: Datatype.STRING,
+    type: DataTypes.STRING,
   },
   date: {
-    type: Datatype.DATE,
+    type: DataTypes.DATE,
   },
 
   start_time: {
-    type: Datatype.DATE,
+    type: DataTypes.DATE,
   },
   end_time: {
-    type: Datatype.DATE,
+    type: DataTypes.DATE,
   },
 
   user_id: {
-    type: Datatype.INTEGER,
+    type: DataTypes.INTEGER,
   },
   desc: {
-    type: Datatype.STRING,
+    type: DataTypes.STRING,
   },
+}, {
+  timestamps: false,
+  tableName: 'Bookings',
 });
-module.exports = BookingModel;
+module.exports = {BookingModel};

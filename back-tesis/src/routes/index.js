@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const router = Router();
+const express = require("express");
+const router = express.Router();
 
 const {
   getBookings,
@@ -8,13 +8,16 @@ const {
   deleteBooking,
 } = require("../controllers/BookingController");
 
-const { getUser, createUser } = require("../controllers/UserController");
+const { login, getUser, createUser, updateUser, deleteUser } = require("../controllers/UserController");
+const authMiddleware = require("../middleware/auth");
 
 router.get("/bookings", getBookings);
 router.post("/bookings", createBookings);
-router.get("/users", getUser);
-router.post("/users", createUser);
-/*router.put("/bookings/:id", updateBooking);*/
-/*router.delete("/bookings/:id", deleteBooking);*/
+
+router.get("/account/login", login);
+router.get("/users", authMiddleware, getUser);
+router.post("/users", authMiddleware, createUser);
+router.put("/users", authMiddleware, updateUser);
+router.delete("/users/:id", authMiddleware, deleteUser);
 
 module.exports = router;
