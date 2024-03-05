@@ -45,8 +45,8 @@ const login = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    const result = await User.findAll();
+    res.json(result);
   } catch (err) {
     console.error(err);
     res.status(500).send(err);
@@ -57,9 +57,9 @@ const createUser = async (req, res) => {
   try {
     const { userName, password, fullName, cellPhone, apartment, role } = req.body;
     let passwordHash = await bcrypt.hash(password, 8);
-    const user = await User.create({ userName, passwordHash, fullName, cellPhone, apartment, role, status: true });
+    const result = await User.create({ userName, passwordHash, fullName, cellPhone, apartment, role, status: true });
 
-    res.json(user);
+    res.json(result);
   } catch (err) {
     console.error(err);
     res.status(500).send(err);
@@ -71,20 +71,15 @@ const updateUser = async (req, res) => {
     const { id } = req.query;
     const { userName, password, fullName, cellPhone, apartment, role, status } = req.body;
     let passwordHash = await bcrypt.hash(password, 8);
-    let item = {
-      userName,
-      passwordHash,
-      fullName,
-      cellPhone,
-      apartment,
-      role,
-      status
-    };
+    let user = await User.findOne({ where: { id } });
+    if (!user) {
+      throw new Error("No existe el registro a actualizar.");
+    }
 
-    const result = await User.update(item, { where: { id } })
+    const result = await User.update({ userName, passwordHash, fullName, cellPhone, apartment, role, status }, { where: { id } })
     if (result > 0) {
-      let user = await User.findOne({ where: { id } });
-      res.json(user);
+      user = await User.findOne({ where: { id } });
+      res.json({ message: "Registro actualizado.", data: user });
     }
     else {
       res.json({ message: "No se actualizo el registro." });
@@ -98,9 +93,13 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
+    let user = await User.findOne({ where: { id } });
+    if (!user) {
+      throw new Error("No existe el registro a eliminar.");
+    }
     const result = await User.update({ status: false }, { where: { id } });
     if (result > 0) {
-      res.json({ message: "Registro Eliminado." });
+      res.json({ message: "Registro Eliminado.", data: user });
     }
     else {
       res.json({ message: "No se elimino el registro." });
