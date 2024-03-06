@@ -7,7 +7,7 @@
   </div>
   <div class="middle">
     <div class="box">
-      <form #loginForm="ngForm">
+      <form [formGroup]="loginForm">
         <p>Ingrese a su cuenta</p>
         <ion-item>
           <ion-label position="stacked">Ingresa tu usuario</ion-label>
@@ -15,8 +15,7 @@
             type="email"
             placeholder="Email"
             name="email"
-            #email="ngModel"
-            [(ngModel)]="login.email"
+            formControlName="email"
             required
             email
           ></ion-input>
@@ -26,7 +25,7 @@
             name="mail"
           ></ion-icon>
         </ion-item>
-        <div *ngIf="email.invalid && email.touched">
+        <div *ngIf="f['email'].errors">
           <ion-text color="danger">
             <h4 style="padding-left: 20px; margin-top: 10px">
               Correo electrónico inválido
@@ -40,8 +39,7 @@
             [type]="type ? 'password' : 'text'"
             placeholder="Contraseña"
             name="password"
-            #password="ngModel"
-            [(ngModel)]="login.password"
+            formControlName="password"
             required
             password
           ></ion-input>
@@ -52,7 +50,7 @@
             (click)="changeType()"
           ></ion-icon>
         </ion-item>
-        <div *ngIf="password.invalid && password.touched">
+        <div *ngIf="f['password'].errors">
           <ion-text color="danger">
             <h4 style="padding-left: 20px; margin-top: 10px">
               Ingresa nuevamente tu contraseña

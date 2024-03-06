@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
+import { AuthService } from '../core/services/auth.service';
+import { User } from '../core/models/User';
+import { AuthData } from '../core/models/AuthData';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,27 +16,49 @@ import { NavController, AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  login = {
-    email: '',
-    password: '',
-  };
-
+  loginForm: FormGroup;
   type: boolean = true;
 
   constructor(
+    private authService: AuthService,
     private navCtrl: NavController,
-    private alertController: AlertController
-  ) {}
+    private alertController: AlertController,
+    private form: FormBuilder
+  ) {
+    this.loginForm = this.form.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 
   ngOnInit() {}
-
-  changeType() {
-    this.type = !this.type;
+  get f() {
+    return this.loginForm.controls;
   }
 
   goToHome() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+    const authData = {
+      userName: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
+    this.authService.login(authData.userName, authData.password).subscribe(
+      (user: AuthData) => {
+        if (user.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('token', user.token);
+          this.navCtrl.navigateForward('/home');
+        } else {
+          console.log('no funciona');
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.navCtrl.navigateForward('/home');
-    console.log(this.login);
   }
 
   async goToForget() {
@@ -42,5 +73,9 @@ export class LoginPage implements OnInit {
 
   goToSignUp() {
     this.navCtrl.navigateForward('/signup');
+  }
+
+  changeType() {
+    this.type = !this.type;
   }
 }

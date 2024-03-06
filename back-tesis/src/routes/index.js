@@ -1,16 +1,37 @@
 const express = require("express");
 const router = express.Router();
 
-const { login, getUser, createUser, updateUser, deleteUser } = require("../controllers/UserController");
+const {
+  login,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require("../controllers/UserController");
 const authMiddleware = require("../middleware/auth");
 
-const { getBookings, createBooking, updateBooking, deleteBooking } = require("../controllers/BookingController");
+const {
+  getBookings,
+  createBooking,
+  updateBooking,
+  deleteBooking,
+} = require("../controllers/BookingController");
 
-const { getFeedbacks, createFeedback, updateFeedback, deleteFeedback } = require("../controllers/FeedbackController");
+const {
+  getFeedbacks,
+  createFeedback,
+  updateFeedback,
+  deleteFeedback,
+} = require("../controllers/FeedbackController");
 
-const { getVisitors, createVisitor, updateVisitor, deleteVisitor } = require("../controllers/VisitorController");
+const {
+  getVisitors,
+  createVisitor,
+  updateVisitor,
+  deleteVisitor,
+} = require("../controllers/VisitorController");
 
-router.get("/account/login", login);
+router.post("/account/login", login);
 router.get("/users", authMiddleware, getUser);
 router.post("/users", authMiddleware, createUser);
 router.put("/users", authMiddleware, updateUser);
