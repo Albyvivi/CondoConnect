@@ -19,7 +19,11 @@ export class AuthService {
   }
 
   public get currentUserValue(): AuthData | null {
-    return this.currentUserSubject.value;
+    if (!localStorage.getItem('currentUser')) {
+      return null;
+    }
+    return JSON.parse(localStorage.getItem('currentUser')!);
+    // return this.currentUserSubject.value;
   }
 
   login(userName: string, password: string) {

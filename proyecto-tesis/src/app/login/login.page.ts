@@ -58,7 +58,6 @@ export class LoginPage implements OnInit {
         console.log(error);
       }
     );
-    this.navCtrl.navigateForward('/home');
   }
 
   async goToForget() {

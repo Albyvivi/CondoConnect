@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (
           [401, 403].includes(err.status) &&
-          this.authenticationService.currentUser
+          this.authenticationService.currentUserValue
         ) {
           this.authenticationService.logout();
         }
