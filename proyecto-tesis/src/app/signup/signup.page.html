@@ -1,0 +1,64 @@
+<ion-content>
+  <div class="upper">
+    <p id="signup">CONDOCONNECT</p>
+  </div>
+  <div class="middle">
+    <div class="box">
+      <form #loginForm="ngForm">
+        <p>Ingresa tus datos</p>
+        <ion-item>
+          <ion-label
+            position="stacked"
+            aria-placeholder="Ingrese su correo electrónico"
+            >Usuario</ion-label
+          >
+          <ion-input type="email" id="email" name="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nombre Completo</ion-label>
+          <ion-input type="name" id="name" name="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input type="password" id="password" name="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Celular</ion-label>
+          <ion-input
+            type="cellphone"
+            id="cellphone"
+            name="cellphone"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Bloque</ion-label>
+          <ion-input type="bloque" id="bloque" name="bloque"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Departamento</ion-label>
+          <ion-input
+            type="departamento"
+            id="departamento"
+            name="departamento"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Usted es?</ion-label>
+          <ion-select id="userType" name="userType" required>
+            <ion-select-option value="propietario"
+              >Propietario</ion-select-option
+            >
+            <ion-select-option value="arrendatario"
+              >Arrendatario</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <div class="btn">
+          <ion-button expand="full" type="submit" (click)="onSubmit()"
+            >Submit</ion-button
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
