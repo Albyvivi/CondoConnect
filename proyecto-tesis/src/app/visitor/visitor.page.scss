@@ -1,0 +1,10 @@
+.my-textarea {
+  border: 1px solid white;
+  height: 100px;
+}
+.my-textarea::placeholder {
+  text-align: justify;
+  width: 100%;
+  height: 100%;
+  size: 0cap;
+}

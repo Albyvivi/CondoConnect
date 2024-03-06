@@ -11,24 +11,18 @@
     </ion-item>
     <ion-item>
       <ion-grid>
-        <ion-row>
-          <ion-col size="5">
-            <ion-button
-              expand="full"
-              shape="round"
-              (click)="selectFeedbackType('quejas')"
-              [color]="feedback.get('feedback')?.value === 'quejas' ? 'primary' : ''"
-              >Quejas</ion-button
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="10">
+            <ion-segment
+              (ionChange)="selectFeedbackType(($event.detail.value || '').toString())"
             >
-          </ion-col>
-          <ion-col size="5">
-            <ion-button
-              expand="full"
-              shape="round"
-              (click)="selectFeedbackType('sugerencias')"
-              [color]="feedback.get('feedback')?.value === 'sugerencias' ? 'primary' : ''"
-              >Sugerencias</ion-button
-            >
+              <ion-segment-button value="quejas">
+                <ion-label>Quejas</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="sugerencias">
+                <ion-label>Sugerencias</ion-label>
+              </ion-segment-button>
+            </ion-segment>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -36,20 +30,47 @@
 
     <ion-item>
       <ion-label for="subject">Relacionado con:</ion-label>
-      <ion-select id="subject" formControlName="subject">
-        <ion-select-option value="mantenimiento"
-          >Mantenimiento</ion-select-option
-        >
-        <ion-select-option value="admin">Adminitración</ion-select-option>
-        <ion-select-option value="seguridad">Seguridad</ion-select-option>
-      </ion-select>
     </ion-item>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-item>
+            <ion-select
+              class="my-select"
+              id="subject"
+              formControlName="subject"
+              placeholder="Elige el área que afecta"
+            >
+              <ion-select-option value="mantenimiento"
+                >Mantenimiento</ion-select-option
+              >
+              <ion-select-option value="admin">Adminitración</ion-select-option>
+              <ion-select-option value="seguridad">Seguridad</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
     <ion-item>
       <ion-label for="desc">Déjanos tu comentario:</ion-label>
-      <ion-textarea id="desc" formControlName="desc" rows="6"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-textarea
+        class="my-textarea"
+        id="desc"
+        formControlName="desc"
+        rows="6"
+      ></ion-textarea>
     </ion-item>
 
-    <ion-button type="submit" color="primary">Aceptar</ion-button>
+    <ion-item>
+      <ion-button
+        type="submit"
+        color="primary"
+        class="ion-justify-content-center"
+        >Aceptar</ion-button
+      >
+    </ion-item>
   </form>
 </ion-content>

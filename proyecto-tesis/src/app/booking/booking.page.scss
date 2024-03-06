@@ -4,3 +4,25 @@ ion-content {
 ion-col {
   display: inline-block;
 }
+.custom-datetime {
+  font-size: 1em;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  text-align: center;
+}
+.custom-segment-button {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  white-space: normal !important;
+  line-height: 1.2;
+  height: auto;
+}
+.selected-date {
+  color: pink;
+}
+.my-textarea {
+  border: 1px solid white;
+  height: 100px;
+}
