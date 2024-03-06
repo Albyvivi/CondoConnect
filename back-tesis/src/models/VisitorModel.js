@@ -2,8 +2,8 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db/connection");
 const User = require("./UserModel");
 
-const BookingModel = sequelize.define("booking", {
-  area: {
+const VisitorModel = sequelize.define("visitor", {
+  visitorType: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -11,12 +11,12 @@ const BookingModel = sequelize.define("booking", {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  startTime: {
+  time: {
     type: DataTypes.TIME,
     allowNull: false,
   },
-  endTime: {
-    type: DataTypes.TIME,
+  parkingSlot: {
+    type: DataTypes.BOOLEAN,
     allowNull: false,
   },
   description: {
@@ -25,15 +25,15 @@ const BookingModel = sequelize.define("booking", {
   }
 }, {
   timestamps: false,
-  tableName: 'bookings',
+  tableName: 'visitors',
 });
 
-User.hasOne(BookingModel, {
+User.hasOne(VisitorModel, {
   foreignKey: 'userid'
 });
 
-BookingModel.belongsTo(User, {
+VisitorModel.belongsTo(User, {
   foreignKey: 'userid'
 });
 
-module.exports = BookingModel;
+module.exports = VisitorModel;
