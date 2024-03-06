@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Realiza tu reserva</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form heigh="100%" [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Selecciona el área que deseas reservar</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="5">
+            <ion-button
+              expand="full"
+              shape="round"
+              (click)="selectArea('futbol')"
+              [color]="bookingForm.get('area')?.value === 'futbol' ? 'primary' : ''"
+              >Cancha de Fútbol</ion-button
+            >
+          </ion-col>
+          <ion-col size="5">
+            <ion-button
+              expand="full"
+              shape="round"
+              (click)="selectArea('basket')"
+              [color]="bookingForm.get('area')?.value === 'basket' ? 'primary' : ''"
+              >Cancha de Basket</ion-button
+            >
+          </ion-col>
+          <ion-col size="5">
+            <ion-button
+              expand="full"
+              shape="round"
+              (click)="selectArea('casa')"
+              [color]="bookingForm.get('area')?.value === 'casa' ? 'primary' : ''"
+              >Casa Comunal</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-label>¿Cuándo deseas reservar tu espacio?</ion-label>
+      <ion-datetime
+        presentation="date"
+        min="{{ myDate }}"
+        max="{{ maxDate }}"
+        [preferWheel]="true"
+        [(ngModel)]="myDate"
+        (ionChange)="dateChanged($event)"
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Desde</ion-label>
+      <ion-buttons slot="start">
+        <ion-datetime
+          presentation="time"
+          formControlName="startTime"
+          hour-values="09, 10, 11, 12, 13, 14, 15, 16, 17"
+          minute-values="00, 30"
+        ></ion-datetime>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hasta</ion-label>
+      <ion-buttons slot="end">
+        <ion-datetime
+          formControlName="startTime"
+          presentation="time"
+          hour-values="09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21"
+          minute-values="00, 30"
+        ></ion-datetime>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Observaciones:</ion-label>
+      <ion-textarea
+        formControlName="desc"
+        aria-placeholder="Indica cualquier detalle necesario para tu reserva"
+        style="--placeholder-color: #ffffff"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-button type="submit" [disabled]="bookingForm.invalid"
+      >ACEPTAR</ion-button
+    >
+  </form>
+</ion-content>
