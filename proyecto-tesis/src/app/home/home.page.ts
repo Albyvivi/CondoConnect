@@ -6,16 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  navCtrl: any;
 
   constructor() {}
-  goToBookings() {
-    this.navCtrl.navigateForward('/booking');
-  }
-  goToFeedback() {
-    this.navCtrl.navigateForward('/feedback');
-  }
-  goToVisitors() {
-    this.navCtrl.navigateForward('/visitor');
-  }
+
 }
